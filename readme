@@ -1,0 +1,38 @@
+# Sistema de Gerenciamento de Inventário
+
+Este repositório contém o código SQL para um sistema de gerenciamento de inventário. O sistema gerencia categorias de produtos, produtos, fornecedores e relacionamentos entre produtos e fornecedores.
+
+## Estrutura do Projeto
+
+O projeto inclui os seguintes componentes:
+
+- **Banco de Dados**: `InventarioArmazem` - Contém tabelas para categorias, produtos, fornecedores e relacionamento entre produtos e fornecedores.
+- **Tabelas**:
+  - `Categorias`: Armazena categorias de produtos.
+  - `Produtos`: Armazena informações sobre os produtos.
+  - `Fornecedores`: Armazena informações sobre os fornecedores.
+  - `ProdutoFornecedor`: Relaciona produtos com fornecedores.
+
+## Scripts SQL
+
+Os seguintes scripts estão disponíveis:
+
+1. **Criar e Configurar o Banco de Dados**: 
+    - Criação das tabelas e definição de relacionamentos.
+2. **Inserir Dados**: 
+    - Insere dados exemplo nas tabelas.
+3. **Consultar Dados**: 
+    - Consultas para visualizar produtos, quantidades e fornecedores.
+4. **Excluir Dados**: 
+    - Exclui fornecedores e as referências associadas na tabela de relacionamento.
+
+## Como Usar
+
+1. Execute o script SQL para criar o banco de dados e as tabelas.
+2. Insira dados exemplo.
+3. Execute consultas para visualizar os dados inseridos e as operações realizadas.
+4. Teste a exclusão de fornecedores e observe como os dados são manipulados.
+
+## Contribuições
+
+Contribuições são bem-vindas! Por favor, envie um pull request ou abra uma issue para discutir melhorias.
