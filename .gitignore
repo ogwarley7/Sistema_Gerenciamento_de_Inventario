@@ -1,0 +1,15 @@
+# Ignorar arquivos de banco de dados
+*.sql
+
+# Ignorar arquivos de log
+*.log
+
+# Ignorar arquivos temporários
+*.tmp
+*.swp
+
+# Ignorar arquivos de configuração local
+*.local
+
+# Ignorar diretórios de backup
+backup/
