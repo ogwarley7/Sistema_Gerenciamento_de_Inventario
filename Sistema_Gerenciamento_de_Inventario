@@ -1,0 +1,7 @@
+Desenvolva um sistema de gerenciamento de inventário para uma loja utilizando um banco de dados relacional. O sistema deve permitir a categorização de produtos, a gestão de fornecedores e o relacionamento entre produtos e fornecedores. As seguintes funcionalidades são necessárias:
+
+Categorias: Armazena informações sobre as categorias dos produtos.
+Produtos: Armazena informações sobre os produtos, incluindo nome, preço, descrição, quantidade em estoque e categoria.
+Fornecedores: Armazena informações sobre os fornecedores, incluindo nome, contato e endereço.
+Relacionamento Produto-Fornecedor: Armazena o relacionamento entre produtos e fornecedores.
+Você deve fornecer scripts SQL para criar o banco de dados, tabelas, inserir dados e realizar consultas. Inclua também exemplos de operações básicas, como a visualização de produtos e suas quantidades, bem como a exclusão de fornecedores.
