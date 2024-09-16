@@ -1,0 +1,79 @@
+-- Desabilitar atualizações seguras
+SET SQL_SAFE_UPDATES = 0;
+
+-- Excluir o banco de dados se ele existir
+DROP DATABASE IF EXISTS InventarioArmazem;
+
+-- Criar o banco de dados
+CREATE DATABASE InventarioArmazem;
+
+-- Selecionar o banco de dados
+USE InventarioArmazem;
+
+-- Criar a tabela Categorias
+CREATE TABLE Categorias (
+    ID_categoria INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL
+);
+
+-- Criar a tabela Produtos
+CREATE TABLE Produtos (
+    ProdutoID INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL,
+    preco DECIMAL(10,2) NOT NULL,
+    descricao TEXT NOT NULL,
+    qtd INT,
+    ID_categoria INT,
+    FOREIGN KEY (ID_categoria) REFERENCES Categorias(ID_categoria)
+);
+
+-- Criar a tabela Fornecedores
+CREATE TABLE Fornecedores (
+    ID_fornecedor INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL,
+    contato VARCHAR(22) NOT NULL,
+    endereco TEXT NOT NULL
+);
+
+-- Criar a tabela de relacionamento ProdutoFornecedor
+CREATE TABLE ProdutoFornecedor (
+    ProdutoID INT,
+    ID_fornecedor INT,
+    PRIMARY KEY (ProdutoID, ID_fornecedor),
+    FOREIGN KEY (ProdutoID) REFERENCES Produtos(ProdutoID),
+    FOREIGN KEY (ID_fornecedor) REFERENCES Fornecedores(ID_fornecedor)
+);
+
+-- Inserir dados na tabela Categorias
+INSERT INTO Categorias(nome) VALUES
+('chocolate'),
+('Bala'),
+('Chiclete');
+
+-- Inserir dados na tabela Produtos
+INSERT INTO Produtos(nome, preco, descricao, qtd, ID_categoria) VALUES 
+('KitKat', 7.00, 'é uma barra de chocolate parecido com bis', 50, (SELECT ID_categoria FROM Categorias WHERE nome = 'chocolate')),
+('Halls', 2.00, 'é uma bala comum', 70, (SELECT ID_categoria FROM Categorias WHERE nome = 'Bala')),
+('Trident', 3.50, 'é uma goma de mascar', 35, (SELECT ID_categoria FROM Categorias WHERE nome = 'Chiclete'));
+
+-- Inserir dados na tabela Fornecedores
+INSERT INTO Fornecedores(nome, contato, endereco) VALUES
+('Marcio', '48991467158', 'rio vermelho'),
+('Ricardo', '4899748570', 'centro'),
+('Davi', '489985875', 'campeche');
+
+-- Inserir dados na tabela ProdutoFornecedor para conectar produtos e fornecedores
+INSERT INTO ProdutoFornecedor(ProdutoID, ID_fornecedor) VALUES
+((SELECT ProdutoID FROM Produtos WHERE nome = 'KitKat'), (SELECT ID_fornecedor FROM Fornecedores WHERE nome = 'Marcio')),
+((SELECT ProdutoID FROM Produtos WHERE nome = 'Halls'), (SELECT ID_fornecedor FROM Fornecedores WHERE nome = 'Ricardo')),
+((SELECT ProdutoID FROM Produtos WHERE nome = 'Trident'), (SELECT ID_fornecedor FROM Fornecedores WHERE nome = 'Davi'));
+
+-- Exemplo de consulta para visualizar todos os produtos, suas quantidades e seus fornecedores
+SELECT p.nome AS Produto, p.qtd AS Quantidade, f.nome AS Fornecedor
+FROM Produtos p
+LEFT JOIN ProdutoFornecedor pf ON p.ProdutoID = pf.ProdutoID
+LEFT JOIN Fornecedores f ON pf.ID_fornecedor = f.ID_fornecedor;
+
+-- Consulta para visualizar produtos e quantidades após atualizações e exclusões
+SELECT p.nome AS Produto, p.qtd AS Quantidade
+FROM Produtos p;
